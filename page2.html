@@ -1,0 +1,343 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EXAM SPHERE - Student Dashboard</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #eef2f7;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: auto;
+        }
+
+        header {
+            text-align: center;
+            background: #243b55;
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .section {
+            background: white;
+            padding: 25px;
+            margin-top: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px #ccc;
+            scroll-margin-top: 20px;
+        }
+
+        h2 {
+            color: #243b55;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px;
+            margin-top: 7px;
+            border: 1px solid #aaa;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        textarea {
+            height: 300px;
+            background: #17212b;
+            color: white;
+            font-family: Consolas, monospace;
+            font-size: 15px;
+        }
+
+        button {
+            background: #087fdb;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 18px;
+            font-size: 15px;
+        }
+
+        button:hover {
+            background: #065fa3;
+        }
+
+        .back {
+            background: #555;
+        }
+
+        .output {
+            background: #f1f6fb;
+            padding: 18px;
+            margin-top: 15px;
+            border-radius: 8px;
+            overflow-wrap: anywhere;
+        }
+
+        pre {
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            font-family: Consolas, monospace;
+        }
+
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+
+        .error {
+            color: #c0392b;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>EXAM SPHERE</h1>
+        <p>Adaptive Quiz & Exam Engine</p>
+        <p>Campus Academic Management System</p>
+    </header>
+
+    <!-- MODULE 1: STUDENT -->
+    <div class="section" id="student">
+
+        <h2>1. Student Module</h2>
+
+        <label>Student Name</label>
+        <input type="text" id="studentName"
+               placeholder="Enter your name">
+
+        <label>Student ID Number</label>
+        <input type="text" id="studentId"
+               placeholder="Enter your student ID">
+
+        <label>Branch</label>
+        <select id="branch">
+            <option value="">Select Branch</option>
+            <option>CSE</option>
+            <option>ECE</option>
+            <option>EEE</option>
+            <option>IT</option>
+            <option>MECH</option>
+            <option>CIVIL</option>
+        </select>
+
+        <label>Year</label>
+        <select id="year">
+            <option value="">Select Year</option>
+            <option>1st Year</option>
+            <option>2nd Year</option>
+            <option>3rd Year</option>
+            <option>4th Year</option>
+        </select>
+
+        <button onclick="saveStudent()">Save Student Details</button>
+        <button class="back" onclick="goHome()">Back to Page 1</button>
+
+        <p id="studentMessage"></p>
+
+    </div>
+
+
+    <!-- MODULE 2: ADAPTIVE ENGINE -->
+    <div class="section" id="adaptive">
+
+        <h2>2. Adaptive Engine Module</h2>
+
+        <p>Write your own Java program in the editor below.</p>
+
+        <label>Java Code Editor</label>
+
+        <textarea id="javaCode"
+            placeholder="Example:
+
+public class Main {
+    public static void main(String[] args) {
+        System.out.println(&quot;Hello World&quot;);
+    }
+}"></textarea>
+
+        <button onclick="checkJavaCode()">Check Java Code</button>
+        <button class="back" onclick="goHome()">Back to Page 1</button>
+
+        <p id="codeMessage"></p>
+
+    </div>
+
+
+    <!-- MODULE 3: RESULT -->
+    <div class="section" id="result">
+
+        <h2>3. Result Module</h2>
+
+        <div class="output">
+            <h3>Student Details</h3>
+
+            <p><b>Student Name:</b>
+                <span id="showName">Not entered</span></p>
+
+            <p><b>Student ID:</b>
+                <span id="showId">Not entered</span></p>
+
+            <p><b>Branch:</b>
+                <span id="showBranch">Not entered</span></p>
+
+            <p><b>Year:</b>
+                <span id="showYear">Not entered</span></p>
+        </div>
+
+        <div class="output">
+            <h3>Complete Java Code</h3>
+            <pre id="showCode">No Java code submitted.</pre>
+        </div>
+
+        <div class="output">
+            <h3>Java Code Checking Result</h3>
+            <p id="showResult">No checking result available.</p>
+        </div>
+
+        <button class="back" onclick="goHome()">Back to Page 1</button>
+
+    </div>
+
+</div>
+
+<script>
+
+    function goHome() {
+        window.location.href = "index.html";
+    }
+
+    function displayStudentDetails() {
+
+        document.getElementById("showName").textContent =
+            document.getElementById("studentName").value || "Not entered";
+
+        document.getElementById("showId").textContent =
+            document.getElementById("studentId").value || "Not entered";
+
+        document.getElementById("showBranch").textContent =
+            document.getElementById("branch").value || "Not entered";
+
+        document.getElementById("showYear").textContent =
+            document.getElementById("year").value || "Not entered";
+    }
+
+    function saveStudent() {
+
+        let name = document.getElementById("studentName").value.trim();
+        let id = document.getElementById("studentId").value.trim();
+        let branch = document.getElementById("branch").value;
+        let year = document.getElementById("year").value;
+
+        displayStudentDetails();
+
+        if (!name || !id || !branch || !year) {
+            document.getElementById("studentMessage").textContent =
+                "Please fill in all student details.";
+            return;
+        }
+
+        document.getElementById("studentMessage").textContent =
+            "Student details saved successfully!";
+    }
+
+    function checkJavaCode() {
+
+        let name = document.getElementById("studentName").value.trim();
+        let id = document.getElementById("studentId").value.trim();
+        let branch = document.getElementById("branch").value;
+        let year = document.getElementById("year").value;
+        let code = document.getElementById("javaCode").value;
+
+        displayStudentDetails();
+
+        // Always display the complete submitted code
+        document.getElementById("showCode").textContent =
+            code || "No Java code submitted.";
+
+        let result = document.getElementById("showResult");
+        let message = document.getElementById("codeMessage");
+
+        if (!name || !id || !branch || !year || !code.trim()) {
+
+            result.textContent =
+                "Please complete student details and enter Java code.";
+
+            message.textContent =
+                "Missing information. Please check your entries.";
+
+            window.location.hash = "result";
+            return;
+        }
+
+        // Basic checks only; this does not compile Java
+        let hasClass = /\bclass\s+\w+/.test(code);
+        let hasMain = /\bpublic\s+static\s+void\s+main\s*\(/.test(code);
+        let hasBraces = (code.match(/{/g) || []).length ===
+                        (code.match(/}/g) || []).length;
+
+        if (!hasClass || !hasMain || !hasBraces) {
+
+            result.textContent =
+                "Basic check: Java class, main method, or matching braces may be missing. Actual compiler checking is not connected.";
+
+            result.className = "error";
+
+            message.textContent =
+                "Basic code check found something to review.";
+
+        } else {
+
+            result.textContent =
+                "Basic structure check passed. This does not confirm that the Java program compiles or runs correctly.";
+
+            result.className = "success";
+
+            message.textContent =
+                "Your Java code has been received successfully.";
+        }
+
+        window.location.hash = "result";
+    }
+
+    // Open the correct module selected on Page 1
+    window.addEventListener("load", function() {
+
+        let selectedModule = window.location.hash;
+
+        if (selectedModule) {
+
+            let section = document.querySelector(selectedModule);
+
+            if (section) {
+                section.scrollIntoView();
+            }
+        }
+
+    });
+
+</script>
+
+</body>
+</html>
+
