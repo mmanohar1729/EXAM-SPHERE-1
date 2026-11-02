@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EXAM SPHERE</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #141e30, #243b55);
+            color: white;
+            text-align: center;
+        }
+
+        header {
+            padding: 60px 15px 25px;
+        }
+
+        h1 {
+            font-size: 48px;
+            letter-spacing: 3px;
+        }
+
+        .subtitle {
+            font-size: 22px;
+        }
+
+        .modules {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            padding: 30px 15px;
+        }
+
+        .card {
+            background: white;
+            color: #243b55;
+            width: 260px;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .card h2 {
+            font-size: 22px;
+        }
+
+        .card p {
+            min-height: 65px;
+            line-height: 1.5;
+        }
+
+        button {
+            background: #00b894;
+            color: white;
+            border: none;
+            padding: 13px 35px;
+            border-radius: 7px;
+            font-size: 17px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #008f72;
+        }
+
+        footer {
+            padding: 25px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>EXAM SPHERE</h1>
+
+    <p class="subtitle">
+        Adaptive Quiz & Exam Engine
+    </p>
+
+    <p>Campus Academic Management System</p>
+
+    <h2>Select Your Module</h2>
+</header>
+
+<div class="modules">
+
+    <!-- MODULE 1 -->
+    <div class="card">
+        <h2>1. Student Module</h2>
+
+        <p>
+            Enter your student name, ID number,
+            branch and academic year.
+        </p>
+
+        <button onclick="openModule('student')">
+            Enter
+        </button>
+    </div>
+
+
+    <!-- MODULE 2 -->
+    <div class="card">
+        <h2>2. Adaptive Engine Module</h2>
+
+        <p>
+            Write your own Java program,
+            submit your code and check it.
+        </p>
+
+        <button onclick="openModule('adaptive')">
+            Enter
+        </button>
+    </div>
+
+
+    <!-- MODULE 3 -->
+    <div class="card">
+        <h2>3. Result Module</h2>
+
+        <p>
+            View student information,
+            submitted Java code and checking results.
+        </p>
+
+        <button onclick="openModule('result')">
+            Enter
+        </button>
+    </div>
+
+</div>
+
+<footer>
+    <p>EXAM SPHERE © 2026</p>
+</footer>
+
+<script>
+    function openModule(moduleName) {
+        window.location.href = "page2.html#" + moduleName;
+    }
+</script>
+
+</body>
+</html>
